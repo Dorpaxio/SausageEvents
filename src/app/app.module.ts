@@ -7,13 +7,15 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import {FormsModule} from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { StarEventsComponent } from './star-events/star-events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     FooterComponent,
-    MainPageComponent
+    MainPageComponent,
+    StarEventsComponent
   ],
   imports: [
     BrowserModule,
