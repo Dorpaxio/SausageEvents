@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { StarEventsComponent } from './star-events/star-events.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TopBarComponent,
     FooterComponent,
     MainPageComponent,
-    StarEventsComponent
+    StarEventsComponent,
+    ConnexionComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,
