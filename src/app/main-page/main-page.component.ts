@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { rowsAnimation } from '../../animations/rowsAnimations.animation';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-main-page',
@@ -8,10 +9,13 @@ import { rowsAnimation } from '../../animations/rowsAnimations.animation';
   animations: [rowsAnimation]
 })
 export class MainPageComponent implements OnInit {
-
-  constructor() { }
+  userList = [];
+  constructor(private service : ServiceService) { }
 
   ngOnInit() {
+    this.service.getUsers().subscribe((users : any[]) => {
+      this.userList = users;
+    });
   }
 
 }

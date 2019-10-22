@@ -5,36 +5,36 @@
       <div class="col-md-4 py-5">
         <h1 class="text-muted mb-3 text-center">Inscription</h1>
         <small class="form-text text-muted text-center my-2">Vous avez déjà un compte ? <a routerLink="/connexion">Connectez-vous !</a></small>
-        <form>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label for="inputPseudo" class="text-muted">Pseudo</label>
-            <input type="text" class="form-control form-control-lg" id="inputPseudo">
+            <input formControlName="pseudo" type="text" class="form-control form-control-lg" id="inputPseudo">
           </div>
           <div class="form-group">
             <label for="inputMail" class="text-muted">E-mail</label>
-            <input type="mail" class="form-control form-control-lg" id="inputMail">
+            <input formControlName="mail" type="mail" class="form-control form-control-lg" id="inputMail">
           </div>
           <div class="form-group">
             <label for="inputAdresse" class="text-muted">Adresse</label>
-            <input type="text" class="form-control form-control-lg" id="inputAdresse">
+            <input formControlName="address" type="text" class="form-control form-control-lg" id="inputAdresse">
           </div>
           <div class="form-group">
             <label for="inputVille" class="text-muted">Ville</label>
-            <input type="text" class="form-control form-control-lg" id="inputVille">
+            <input formControlName="ville" type="text" class="form-control form-control-lg" id="inputVille">
           </div>
           <div class="form-group">
             <label for="inputPostal" class="text-muted">Code Postal</label>
-            <input type="number" class="form-control form-control-lg" id="inputPostal">
+            <input formControlName="postal" type="number" class="form-control form-control-lg" id="inputPostal">
           </div>
           <div class="form-group">
             <label for="inputMdp" class="text-muted">Mot de passe</label>
-            <input type="password" class="form-control form-control-lg" id="inputMdp">
+            <input formControlName="mdp" type="password" class="form-control form-control-lg" id="inputMdp">
           </div>
           <div class="form-group">
             <label for="inputMdpVerif" class="text-muted">Mot de passe (vérification)</label>
-            <input type="password" class="form-control form-control-lg" id="inputMdpVerif">
+            <input formControlName="mdp2" type="password" class="form-control form-control-lg" id="inputMdpVerif">
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Inscription</button>
+          <button type="submit" [disabled]="!profileForm.valid" class="btn btn-lg btn-primary btn-block">Inscription</button>
         </form>
       </div>
       <div class="col-md-4"></div>
