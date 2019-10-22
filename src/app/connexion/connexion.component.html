@@ -4,19 +4,19 @@
       <div class="col-md-4"></div>
       <div class="col-md-4 py-5">
         <h1 class="text-muted mb-3 text-center">Connexion</h1>
-        <form>
+        <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <input type="text" class="form-control form-control-lg" id="inputPseudo" placeholder="Pseudonyme">
+            <input formControlName="pseudo" type="text" class="form-control form-control-lg" id="inputPseudo" placeholder="Pseudonyme">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control form-control-lg" id="inputPassword" aria-describedby="mdpOublie" placeholder="Mot de passe">
+            <input formControlName="password" type="password" class="form-control form-control-lg" id="inputPassword" aria-describedby="mdpOublie" placeholder="Mot de passe">
             <a href="" id="mdpOublie" class="form-text text-muted text-right">Mot de passe oublié ?</a>
           </div>
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="rememberMe">
             <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
+          <button [disabled]="!connexionForm.valid" type="submit" class="btn btn-lg btn-primary btn-block">Connexion</button>
         </form>
         <small class="form-text text-muted text-center mt-2">Vous n'avez pas encore de compte ? <a routerLink="/inscription">Inscrivez-vous !</a></small>
       </div>

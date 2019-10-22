@@ -11,7 +11,10 @@ import { StarEventsComponent } from './star-events/star-events.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { TokenInterceptorService } from './token-interceptor.service';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,13 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions()
   ],
-  providers: [],
+  providers: [AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true,
+  },
+  AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

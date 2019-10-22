@@ -1,4 +1,3 @@
-import { ServiceService } from './service.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,9 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'SausageEvents';
 
-  constructor(private service : ServiceService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.service.ping().subscribe();
-  }
 }
