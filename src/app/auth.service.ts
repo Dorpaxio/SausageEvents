@@ -13,7 +13,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  baseUri = 'https://localhost:3001/auth/';
+  baseUri = 'https://charlesdesgenetez.fr:3001/auth/';
 
   constructor(private http: HttpClient,
               private router: Router) {}

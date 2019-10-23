@@ -11,7 +11,7 @@ export class FileUploadService {
   constructor(private http: HttpClient) { }
 
   postFile(endPoint: string, fileToUpload: File, fileName: string): Observable<boolean | any> {
-    const uri = "https://localhost:3001/" + endPoint;
+    const uri = "https://charlesdesgenetez.fr:3001/" + endPoint;
 
     const formData: FormData = new FormData();
     formData.append('fichier', fileToUpload, fileName);

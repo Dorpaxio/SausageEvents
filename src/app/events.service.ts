@@ -8,7 +8,7 @@ export class EventsService {
 
   constructor(private http: HttpClient) {}
 
-  baseUri = "https://localhost:3001/events/";
+  baseUri = "https://charlesdesgenetez.fr:3001/events/";
 
   getEvents() {
     return this.http.get(this.baseUri);
