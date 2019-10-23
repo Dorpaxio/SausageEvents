@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from "@angular/router";
+import {catchError, map} from 'rxjs/operators';
+import {of} from "rxjs";
 
 export interface User {
   pseudo: string;
@@ -10,9 +13,10 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  baseUri = 'https://charlesdesgenetez.fr:3001/auth/';
+  baseUri = 'https://localhost:3001/auth/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   register(user) {
     return this.http.post<any>(this.baseUri + 'register', user);
@@ -23,7 +27,17 @@ export class AuthService {
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token');
+    if(!localStorage.getItem('token')) return of(false);
+    else {
+      return this.http.get(this.baseUri + 'me').pipe(
+        map(res => {
+          return !!res;
+        }),
+        catchError(err => {
+          return of(false);
+        })
+      );
+    }
   }
 
   getToken() {
@@ -32,5 +46,10 @@ export class AuthService {
 
   getUser() {
     return this.http.get<any>(this.baseUri + 'me');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/connexion']);
   }
 }

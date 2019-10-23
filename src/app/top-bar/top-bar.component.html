@@ -9,12 +9,12 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto mr-5">
-      <a class="nav-item nav-link active">Accueil</a>
-      <a class="nav-item nav-link">Événements</a>
+      <a class="nav-item nav-link active" routerLink="/">Accueil</a>
+      <a class="nav-item nav-link" routerLink="/evenements">Événements</a>
       <a class="nav-item nav-link">A propos</a>
     </div>
     <p class="my-2 my-lg-0 mr-3">
-      <ng-template [ngIf]="!isLogged()" [ngIfElse]="connected">
+      <ng-template [ngIf]="!auth.getToken()" [ngIfElse]="connected">
         <span>
           <button class="btn btn-outline-secondary mr-3" routerLink="/connexion">Connexion</button>
           <button class="btn btn-outline-primary" routerLink="/inscription">S'inscrire</button>
@@ -22,8 +22,8 @@
       </ng-template>
       <ng-template #connected>
         <span>
-          <a *ngIf="user" class="font-weight-bold mr-5" routerLink="/moncompte">{{ user | async}}</a>
-          <button class="btn btn-outline-primary" routerLink="/inscription">Déconnexion</button>
+          <a *ngIf="auth.getToken()" class="font-weight-bold mr-5 text-muted" routerLink="/moncompte">Mon compte</a>
+          <button class="btn btn-outline-primary" (click)="auth.logout()">Déconnexion</button>
         </span>
       </ng-template>
     </p>

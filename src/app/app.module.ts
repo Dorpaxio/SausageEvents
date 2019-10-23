@@ -15,6 +15,11 @@ import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS} from '@angul
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { MonCompteComponent } from './mon-compte/mon-compte.component';
+import { EvenementsComponent } from './evenements/evenements.component';
+import {EventsService} from "./events.service";
+import { DateAgoPipe } from './pipes/date-ago.pipe';
+import {FileUploadService} from "./file-upload.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +29,10 @@ import { AuthGuard } from './auth.guard';
     MainPageComponent,
     StarEventsComponent,
     ConnexionComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    MonCompteComponent,
+    EvenementsComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +47,9 @@ import { AuthGuard } from './auth.guard';
     useClass: TokenInterceptorService,
     multi: true,
   },
-  AuthGuard],
+  AuthGuard,
+  EventsService,
+  FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

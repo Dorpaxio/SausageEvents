@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService, User} from '../auth.service';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {catchError, distinctUntilChanged, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-top-bar',
@@ -9,19 +9,27 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-  user;
   constructor(private auth: AuthService) { }
 
+  user;
+
   ngOnInit() {
-    this.user = this.auth.getUser().pipe(
-      map(res => {
-        return res.pseudo;
-      })
-    );
+    this.retrieveUser();
   }
 
-  isLogged() {
-    return this.auth.loggedIn();
+  retrieveUser() {
+    this.auth.loggedIn().subscribe(res => {
+      if(res) {
+        this.user = this.auth.getUser().pipe(distinctUntilChanged(),
+          map(res => {
+            return res.pseudo;
+          }),
+          catchError(err => {
+            return of("");
+          })
+        );
+      }
+    });
   }
 
 }
