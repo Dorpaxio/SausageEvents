@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-lg-2 d-flex justify-content-center flex-wrap">
-      <img [src]="user.img || 'assets/img/empty-profile.png'" class="w-100 border rounded mb-1">
+      <img [src]="user.img" (error)="imgError()" class="w-100 border rounded mb-1">
       <button class="btn btn-sm btn-dark mb-3" data-toggle="modal" data-target="#pictureChangeModal">Changer de photo</button>
 
       <!-- Modal -->

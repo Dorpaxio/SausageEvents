@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
-import {of} from "rxjs";
+import {of} from 'rxjs';
+import { BACKEND_URL } from '../assets/config';
 
 export interface User {
   pseudo: string;
@@ -13,7 +14,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  baseUri = 'https://charlesdesgenetez.fr:3001/auth/';
+  baseUri = BACKEND_URL + 'auth/';
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -27,8 +28,9 @@ export class AuthService {
   }
 
   loggedIn() {
-    if(!localStorage.getItem('token')) return of(false);
-    else {
+    if (!localStorage.getItem('token')) {
+      return of(false);
+    } else {
       return this.http.get(this.baseUri + 'me').pipe(
         map(res => {
           return !!res;
