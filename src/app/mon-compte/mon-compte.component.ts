@@ -36,7 +36,7 @@ export class MonCompteComponent implements OnInit {
   }
 
   uploadFile() {
-    this.uploadService.postFile('users/profilePicture', this.imgToUpload, this.user.pseudo).subscribe(data => {
+    this.uploadService.postFile('users/profilePicture', this.imgToUpload).subscribe(data => {
       if(!!data.imageUrl)
         this.user.img = data.imageUrl;
       else
