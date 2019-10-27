@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div *ngIf="events; else #loading" *ngFor="let event of events | async" class="card mb-3">
+  <div *ngIf="events; else loading" *ngFor="let event of events | async" class="card mb-3">
     <div class="row no-gutters">
       <div class="col-md-2">
         <img src="https://images.math.cnrs.fr/IMG/png/section8-image.png" class="card-img" alt="...">
@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <ng-template id="loading">
+  <ng-template #loading>
     <div class="text-center">
       <div class="spinner-grow text-primary" role="status">
         <span class="sr-only">Chargement...</span>
