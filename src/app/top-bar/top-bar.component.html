@@ -9,7 +9,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto mr-5">
-      <a class="nav-item nav-link active" routerLink="/">Accueil</a>
+      <a class="nav-item nav-link" routerLink="/" [ngClass]="{ active: router.url === '/' }">Accueil</a>
       <a class="nav-item nav-link" routerLink="/evenements">Événements</a>
       <a class="nav-item nav-link">A propos</a>
     </div>
