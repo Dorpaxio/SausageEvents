@@ -1,6 +1,6 @@
 <div class="container mt-5">
-  <ng-container *ngIf="events.length == 0; else loading">
-    <div *ngFor="let event of events | async" class="card mb-3">
+  <ng-container *ngIf="events | async && events.length == 0; else loading">
+    <div *ngFor="let event of events" class="card mb-3">
       <div class="row no-gutters">
         <div class="col-md-2">
           <img src="https://images.math.cnrs.fr/IMG/png/section8-image.png" class="card-img" alt="...">
