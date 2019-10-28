@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <ng-container *ngIf="(events | async).length > 0; else loading">
+  <ng-container *ngIf="events | async; else loading">
     <div *ngFor="let event of events" class="card mb-3">
       <div class="row no-gutters">
         <div class="col-md-2">
