@@ -1,20 +1,18 @@
 <div class="container mt-5">
-  <ng-container *ngIf="events | async; else loading">
-    <div *ngFor="let event of events" class="card mb-3">
-      <div class="row no-gutters">
-        <div class="col-md-2">
-          <img src="https://images.math.cnrs.fr/IMG/png/section8-image.png" class="card-img" alt="...">
-        </div>
-        <div class="col-md-10">
-          <div class="card-body">
-            <h5 class="card-title">{{event.titre}}</h5>
-            <p class="card-text">{{event.description}}</p>
-            <p class="card-text"><small class="text-muted">Publié {{event.date_creation | dateAgo}}.</small></p>
-          </div>
+  <ng-template ngFor let-event [ngForOf]="events | async" *ngIf="(events | async)?.length > 0" class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-2">
+        <img src="https://images.math.cnrs.fr/IMG/png/section8-image.png" class="card-img" alt="...">
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">{{event.titre}}</h5>
+          <p class="card-text">{{event.description}}</p>
+          <p class="card-text"><small class="text-muted">Publié {{event.date_creation | dateAgo}}.</small></p>
         </div>
       </div>
     </div>
-  </ng-container>
+  </ng-template>
   <ng-template #loading>
     <div class="text-center">
       <div class="spinner-grow text-primary" role="status">
