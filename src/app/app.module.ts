@@ -20,6 +20,7 @@ import { EvenementsComponent } from './evenements/evenements.component';
 import {EventsService} from "./events.service";
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import {FileUploadService} from "./file-upload.service";
+import { FicheEventComponent } from './evenements/fiche-event/fiche-event.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {FileUploadService} from "./file-upload.service";
     InscriptionComponent,
     MonCompteComponent,
     EvenementsComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    FicheEventComponent
   ],
   imports: [
     BrowserModule,
