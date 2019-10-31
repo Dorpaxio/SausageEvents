@@ -8,7 +8,7 @@ import {EventsService} from "../../events.service";
 })
 export class FicheEventComponent implements OnInit {
   @Input() event;
-  @Input() subscribed: boolean;
+  //@Input() subscribed: boolean;
 
   constructor(private eventsService:EventsService) { }
 
