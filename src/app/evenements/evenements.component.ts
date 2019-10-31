@@ -14,16 +14,7 @@ export class EvenementsComponent implements OnInit {
   constructor(private eventsService: EventsService) { }
 
   ngOnInit() {
-    this.eventsService.getSubscriptions()
-      .pipe(
-        tap(data => console.log(data)),
-        map((data: {event_id}) => data.event_id),
-        tap(data => console.log(data)))
-      .subscribe(
-      (data: any[]) => {
-        this.subscriptions = data;
-      }
-    );
+    this.eventsService.getSubs().subscribe(data => console.log(data)).then(() => {});
     this.events$ = this.eventsService.getEvents();
   }
 
