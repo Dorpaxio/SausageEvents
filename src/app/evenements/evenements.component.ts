@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventsService} from '../events.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-evenements',
@@ -7,17 +8,20 @@ import {EventsService} from '../events.service';
   styleUrls: ['./evenements.component.scss']
 })
 export class EvenementsComponent implements OnInit {
-  events;
+  events$;
+  subscriptions = [];
 
   constructor(private eventsService: EventsService) { }
 
   ngOnInit() {
-    this.events = this.eventsService.getEvents();
-  }
-
-  // Faire un component indépendant
-  subscribeEvent(eventId) {
-    this.eventsService.subscribeEvent(eventId).subscribe();
+    this.eventsService.getSubscriptions()
+      .map(data => data.event_id)
+      .subscribe(
+      (data: any[]) => {
+        this.subscriptions = data;
+      }
+    );
+    this.events$ = this.eventsService.getEvents();
   }
 
 }
