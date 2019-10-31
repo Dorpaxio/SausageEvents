@@ -15,7 +15,8 @@ export class EvenementsComponent implements OnInit {
 
   ngOnInit() {
     this.eventsService.getSubscriptions()
-      .pipe(map(data => data.event_id))
+      .tap(data => console.log(data))
+      .pipe(map((data: {event_id}) => data.event_id))
       .subscribe(
       (data: any[]) => {
         this.subscriptions = data;
