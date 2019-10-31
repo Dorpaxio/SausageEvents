@@ -13,9 +13,11 @@ export class EvenementsComponent implements OnInit {
 
   ngOnInit() {
     this.events = this.eventsService.getEvents();
-    this.eventsService.createEvent().subscribe(res => {
-      console.log(res);
-    });
+  }
+
+  // Faire un component indépendant
+  subscribeEvent(eventId) {
+    this.eventsService.subscribeEvent(eventId).subscribe();
   }
 
 }

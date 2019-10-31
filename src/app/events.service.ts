@@ -18,4 +18,9 @@ export class EventsService {
   createEvent() {
     return this.http.post(this.baseUri, {yes: 'oui'});
   }
+
+  subscribeEvent(eventId) {
+    return this.http.post(this.baseUri + "subscriptions/", {id: eventId});
+  }
+
 }
