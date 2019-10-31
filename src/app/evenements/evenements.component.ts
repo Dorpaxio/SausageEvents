@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventsService} from '../events.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-evenements',
@@ -15,8 +15,10 @@ export class EvenementsComponent implements OnInit {
 
   ngOnInit() {
     this.eventsService.getSubscriptions()
-      .tap(data => console.log(data))
-      .pipe(map((data: {event_id}) => data.event_id))
+      .pipe(
+        tap(data => console.log(data)),
+        map((data: {event_id}) => data.event_id)),
+        tap(data => console.log(data))
       .subscribe(
       (data: any[]) => {
         this.subscriptions = data;
