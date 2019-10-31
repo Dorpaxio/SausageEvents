@@ -23,8 +23,6 @@ export class EventsService {
     return this.http.post(this.baseUri + "subscriptions/", {id: eventId});
   }
 
-  getSubs() {
-    return this.http.get(this.baseUri + "subscriptions/");
-  }
+  getSubs = () => this.http.get(this.baseUri + "subscriptions/");
 
 }
