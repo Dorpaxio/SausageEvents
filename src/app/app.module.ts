@@ -21,6 +21,7 @@ import {EventsService} from "./events.service";
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import {FileUploadService} from "./file-upload.service";
 import { FicheEventComponent } from './evenements/fiche-event/fiche-event.component';
+import { EventCreationComponent } from './evenements/event-creation/event-creation.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FicheEventComponent } from './evenements/fiche-event/fiche-event.compon
     MonCompteComponent,
     EvenementsComponent,
     DateAgoPipe,
-    FicheEventComponent
+    FicheEventComponent,
+    EventCreationComponent
   ],
   imports: [
     BrowserModule,

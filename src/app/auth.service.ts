@@ -54,4 +54,5 @@ export class AuthService {
     localStorage.removeItem('token');
     this.router.navigate(['/connexion']);
   }
+
 }

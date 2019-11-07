@@ -1,7 +1,7 @@
 <div class="container mt-5">
-  <button *ngIf="" class="btn btn-primary btn-lg mb-3">Créer un événement</button>
+  <button *ngIf="canCreateEvent$ | async" class="btn btn-primary btn-lg mb-3">Créer un événement</button>
   <ng-template ngFor let-ev [ngForOf]="events$ | async" *ngIf="(events$ | async)?.length > 0; else loading">
-    <app-fiche-event [event]="ev" [subscribed]="true"></app-fiche-event>
+    <app-fiche-event [event]="ev" [subscribed]="subscriptions.includes(ev.id)"></app-fiche-event>
   </ng-template>
   <ng-template #loading>
     <div class="text-center">

@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3" data-aos="fade-up">
   <div class="row no-gutters">
     <div class="col-md-2">
       <img src="https://images.math.cnrs.fr/IMG/png/section8-image.png" class="card-img" alt="...">
@@ -7,10 +7,16 @@
       <div class="card-body">
         <h5 class="card-title">{{event.titre}}</h5>
         <p class="card-text">{{event.description}}</p>
-        <p class="card-text">
+        <div class="card-text d-flex align-items-center">
           <small class="text-muted">Publié {{event.date_creation | dateAgo}}.</small>
-          <button class="btn btn-primary btn-sm float-right" (click)="subscribeEvent(event.id)" [disabled]="subscribed">S'inscrire</button>
-        </p>
+
+          <div class="ml-auto">
+            <small class="text-primary mr-2" [@showSubscriptionMessage]='showMessage'>Vous êtes
+              maintenant inscris à cet événement.</small>
+            <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="subscribed">S'inscrire
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
