@@ -33,7 +33,10 @@ export class InscriptionComponent implements OnInit {
     this.authService.register({
       pseudo: this.profileForm.value.pseudo,
       mail: this.profileForm.value.mail,
-      password: this.profileForm.value.mdp
+      password: this.profileForm.value.mdp,
+      address: this.profileForm.value.address,
+      city: this.profileForm.value.ville,
+      postal: this.profileForm.value.postal
     }).subscribe(
       (res) => {
         localStorage.setItem('token', res.token);

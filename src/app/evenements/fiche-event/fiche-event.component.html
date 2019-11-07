@@ -9,7 +9,7 @@
         <p class="card-text">{{event.description}}</p>
         <p class="card-text">
           <small class="text-muted">Publié {{event.date_creation | dateAgo}}.</small>
-          <button class="btn btn-primary btn-sm float-right" (click)="subscribeEvent(event.id)">S'inscrire</button>
+          <button class="btn btn-primary btn-sm float-right" (click)="subscribeEvent(event.id)" [disabled]="subscribed">S'inscrire</button>
         </p>
       </div>
     </div>
