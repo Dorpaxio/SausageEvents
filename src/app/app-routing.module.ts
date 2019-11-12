@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {MainPageComponent} from './main-page/main-page.component';
 import {ConnexionComponent} from './connexion/connexion.component';
 import {InscriptionComponent} from './inscription/inscription.component';
-import {AuthGuard} from './auth.guard';
-import {MonCompteComponent} from "./mon-compte/mon-compte.component";
-import {EvenementsComponent} from "./evenements/evenements.component";
-import {EventCreationComponent} from "./evenements/event-creation/event-creation.component";
+import {AuthGuard} from './guards/auth.guard';
+import {MonCompteComponent} from './mon-compte/mon-compte.component';
+import {EvenementsComponent} from './evenements/evenements.component';
+import {EventCreationComponent} from './evenements/event-creation/event-creation.component';
+import {CreateEventGuard} from './guards/create-event.guard';
 
 // penser authguard
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   {path: 'inscription', component: InscriptionComponent},
   {path: 'moncompte', component: MonCompteComponent, canActivate: [AuthGuard]},
   {path: 'evenements', component: EvenementsComponent},
-  {path: 'evenements/creation', component: EventCreationComponent, canActivate: [AuthGuard, ]}
+  {path: 'evenements/creation', component: EventCreationComponent, canActivate: [AuthGuard, CreateEventGuard]}
 ];
 
 @NgModule({

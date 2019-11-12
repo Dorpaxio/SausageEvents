@@ -14,14 +14,15 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { MonCompteComponent } from './mon-compte/mon-compte.component';
 import { EvenementsComponent } from './evenements/evenements.component';
-import {EventsService} from "./events.service";
+import {EventsService} from './events.service';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
-import {FileUploadService} from "./file-upload.service";
+import {FileUploadService} from './file-upload.service';
 import { FicheEventComponent } from './evenements/fiche-event/fiche-event.component';
 import { EventCreationComponent } from './evenements/event-creation/event-creation.component';
+import {CreateEventGuard} from './guards/create-event.guard';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { EventCreationComponent } from './evenements/event-creation/event-creati
     multi: true,
   },
   AuthGuard,
+  CreateEventGuard,
   EventsService,
   FileUploadService],
   bootstrap: [AppComponent]
