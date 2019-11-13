@@ -29,7 +29,6 @@ export class InscriptionComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('register');
     this.authService.register({
       pseudo: this.profileForm.value.pseudo,
       mail: this.profileForm.value.mail,

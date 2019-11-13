@@ -2,6 +2,19 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { BACKEND_URL } from '../assets/config';
 
+interface Event {
+  GPS_N;
+  GPS_E;
+  address;
+  city;
+  codepostal;
+  title;
+  description;
+  effectifmin;
+  effectifmax;
+  data;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +28,8 @@ export class EventsService {
     return this.http.get(this.baseUri);
   }
 
-  createEvent() {
-    return this.http.post(this.baseUri, {yes: 'oui'});
+  createEvent(event: Event) {
+    return this.http.post(this.baseUri, event);
   }
 
   subscribeEvent(eventId) {
