@@ -24,6 +24,11 @@ import { FicheEventComponent } from './evenements/fiche-event/fiche-event.compon
 import { EventCreationComponent } from './evenements/event-creation/event-creation.component';
 import {CreateEventGuard} from './guards/create-event.guard';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
+registerLocaleData(localeFr, 'fr');
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +57,7 @@ import {CreateEventGuard} from './guards/create-event.guard';
     useClass: TokenInterceptorService,
     multi: true,
   },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
   AuthGuard,
   CreateEventGuard,
   EventsService,

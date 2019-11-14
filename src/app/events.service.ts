@@ -12,7 +12,7 @@ interface Event {
   description;
   effectifmin;
   effectifmax;
-  data;
+  date;
 }
 
 @Injectable({
@@ -28,14 +28,14 @@ export class EventsService {
     return this.http.get(this.baseUri);
   }
 
-  createEvent(event: Event) {
-    return this.http.post(this.baseUri, event);
+  createEvent(ev: Event) {
+    return this.http.post(this.baseUri, {event: ev});
   }
 
   subscribeEvent(eventId) {
-    return this.http.post(this.baseUri + "subscriptions/", {id: eventId});
+    return this.http.post(this.baseUri + 'subscriptions/', {id: eventId});
   }
 
-  getSubs = () => this.http.get(this.baseUri + "subscriptions/");
+  getSubs = () => this.http.get(this.baseUri + 'subscriptions/');
 
 }

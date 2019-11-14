@@ -5,14 +5,16 @@
     </div>
     <div class="col-md-10">
       <div class="card-body">
-        <h5 class="card-title">{{event.titre}}</h5>
-        <p class="card-text">{{event.description}}</p>
+        <h5 class="card-title">{{event.title}}</h5>
+        <div class="card-text row">
+          <p class="col-md-10">{{event.description}}</p>
+          <h4 class="text-right col-md-2 card-subtitle mb-2 text-danger font-weight-bold mt-0">{{event.date | date:'dd MMM yyyy hh\'h\'mm':'UTC'}}</h4>
+        </div>
         <div class="card-text d-flex align-items-center">
           <small class="text-muted">Publié {{event.date_creation | dateAgo}}.</small>
 
           <div class="ml-auto">
-            <small class="text-primary mr-2" [@showSubscriptionMessage]='showMessage'>Vous êtes
-              maintenant inscris à cet événement.</small>
+            <small [ngClass]="{'text-success':success, 'text-danger':!success, 'mr-2':true}" [@showSubscriptionMessage]='showMessage'>{{message}}</small>
             <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="subscribed">S'inscrire
             </button>
           </div>

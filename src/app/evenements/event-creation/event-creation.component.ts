@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EventsService} from '../../events.service';
+import {catchError, map} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-creation',
@@ -13,7 +15,8 @@ export class EventCreationComponent implements OnInit {
   private minutes: string[];
 
   constructor(private fb: FormBuilder,
-              private eventsService: EventsService) {
+              private eventsService: EventsService,
+              private router: Router) {
     this.minutes = Array(60).fill(0).map((x, i) => ('0' + i).slice(-2));
   }
 
@@ -24,8 +27,8 @@ export class EventCreationComponent implements OnInit {
       address: ['', Validators.required],
       city: ['', Validators.required],
       codepostal: ['', Validators.required],
-      effectifmin: [''],
-      effectifmax: [''],
+      effectifmin: ['0'],
+      effectifmax: ['50000'],
       date: ['', Validators.required],
       heures: ['', Validators.required],
       minutes: ['', Validators.required],
@@ -48,9 +51,19 @@ export class EventCreationComponent implements OnInit {
       codepostal: values.codepostal,
       effectifmin: values.effectifmin,
       effectifmax: values.effectifmax,
-      date: dt
+      date: dt.toISOString().replace('Z', ' ').replace('T', ' ').split('.')[0],
     }
-    this.eventsService.createEvent(event).subscribe();
+
+    this.eventsService.createEvent(event).subscribe(
+      (data: {ok, message}) => {
+        if (data.ok) {
+          this.router.navigate(['/evenements']).then(r => {});
+        }
+      },
+      error => {
+        console.log('erreur');
+      }
+    );
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <h1 class="text-primary">Créer un événement</h1>
 
-  <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="onSumbit()">
+  <form class="mt-3" [formGroup]="eventForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="titre" class="font-weight-bold">Titre <span class="text-danger">*</span></label>
       <input formControlName="title" type="text" class="form-control" id="titre" placeholder="Convention de stars">

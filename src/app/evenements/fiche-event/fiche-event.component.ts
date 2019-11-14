@@ -30,7 +30,9 @@ export class FicheEventComponent implements OnInit {
   @Input() event;
   @Input() subscribed: boolean;
 
-  showMessage = false;
+  private showMessage = false;
+  private message = '';
+  private success = false;
 
   constructor(private eventsService: EventsService) {
   }
@@ -39,10 +41,33 @@ export class FicheEventComponent implements OnInit {
 
   }
 
-  subscribeEvent(eventId) {
-    this.eventsService.subscribeEvent(eventId).subscribe();
-    this.subscribed = true;
+  show(message: string, success: boolean) {
+    this.message = message;
     this.showMessage = true;
+    this.success = success;
+  }
+
+  subscribeEvent(eventId) {
+    this.eventsService.subscribeEvent(eventId).subscribe(
+      (result: {ok, message}) => {
+        console.log(result);
+        if (result.ok) {
+          this.subscribed = true;
+          this.show('Vous êtes maintenant inscris à cet événement.', true);
+        } else {
+          this.show('Cet événement a atteint son effectif maximum.', true);
+        }
+      },
+      error => {
+        if (error.status === 403) {
+          this.show('Cet événement a atteint son effectif maximum.', false);
+          this.subscribed = true;
+        } else {
+          this.show('Une erreur est survenue.', false);
+        }
+      }
+    );
+
   }
 
 }
