@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {catchError, map} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import { BACKEND_URL } from '../assets/config';
 
 export interface User {
@@ -53,6 +53,15 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/connexion']);
+  }
+
+  deleteAccount(): Observable<boolean> {
+    return this.http.delete(this.baseUri + 'me').pipe(
+      map((res: {ok, message}) => {
+        if (res.ok) { localStorage.removeItem('token'); }
+        return res.ok;
+      })
+    );
   }
 
 }

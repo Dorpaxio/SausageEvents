@@ -26,6 +26,28 @@
       </div>
       <!-- --- -->
 
+      <!-- Modal Delete -->
+      <div class="modal fade" id="deletionModal" tabindex="-1" role="dialog" aria-labelledby="deletionModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-danger">Supprimer mon compte</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Vous vous apprétez à supprimer votre compte. Cette action est irréversible, êtes-vous sûr de vouloir continuer ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteAccount()">Supprimer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- --- -->
+
       <h4>Mon compte</h4>
       <ul class="nav flex-column" id="myTab" role="tablist">
         <li class="nav-item">
@@ -35,7 +57,7 @@
           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mes informations</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-danger">Supprimer mon compter</a>
+          <a href="" class="nav-link text-danger" data-toggle="modal" data-target="#deletionModal">Supprimer mon compter</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-muted" routerLink="" (click)="auth.logout()">Déconnexion</a>

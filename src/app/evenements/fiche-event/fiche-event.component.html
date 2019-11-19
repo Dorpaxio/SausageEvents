@@ -15,7 +15,7 @@
 
           <div class="ml-auto">
             <small [ngClass]="{'text-success':success, 'text-danger':!success, 'mr-2':true}" [@showSubscriptionMessage]='showMessage'>{{message}}</small>
-            <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="subscribed">S'inscrire
+            <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="subscribed || event.isFull">S'inscrire
             </button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {FileUploadService} from '../file-upload.service';
+import {Router} from '@angular/router';
 
 interface User {
   pseudo: string;
@@ -23,8 +24,11 @@ export class MonCompteComponent implements OnInit {
   defaultProfilePicture = 'assets/img/empty-profile.png';
   timeStamp;
 
+  private deleteConfirmed = false;
+
   constructor(private auth: AuthService,
-              private uploadService: FileUploadService) {
+              private uploadService: FileUploadService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -55,6 +59,16 @@ export class MonCompteComponent implements OnInit {
 
   setImage(url: string) {
     this.user.img = url + '?' + (new Date()).getTime();
+  }
+
+  deleteAccount() {
+    this.auth.deleteAccount().subscribe(ok => {
+      if (ok) {
+        this.router.navigate(['/inscription']).then(() => {});
+      } else {
+        console.log('Erreur dans la suppresion de compte.');
+      }
+    });
   }
 
 }
