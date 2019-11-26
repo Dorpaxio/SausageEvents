@@ -60,7 +60,7 @@ export class FicheEventComponent implements OnInit {
       },
       error => {
         if (error.status === 403) {
-          this.show('Cet événement a atteint son effectif maximum.', false);
+          this.show(error.error.message, false);
           this.subscribed = true;
         } else {
           this.show('Une erreur est survenue.', false);

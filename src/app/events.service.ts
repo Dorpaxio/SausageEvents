@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { BACKEND_URL } from '../assets/config';
 
 interface Event {
@@ -24,8 +24,9 @@ export class EventsService {
 
   baseUri = BACKEND_URL + 'events/';
 
-  getEvents() {
-    return this.http.get(this.baseUri);
+  getEvents(page: number) {
+    const options = page ? {params: new HttpParams().set('page', page.toString())} : {};
+    return this.http.get(this.baseUri, options);
   }
 
   createEvent(ev: Event) {

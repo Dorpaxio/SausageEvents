@@ -1,11 +1,45 @@
+
+
 <div class="container mt-5">
-  <button *ngIf="canCreateEvent$ | async" class="btn btn-primary btn-lg mb-3" routerLink="creation">Créer un événement</button>
-  <ng-template ngFor let-ev [ngForOf]="events$ | async" *ngIf="(events$ | async)?.length > 0; else loading">
-    <app-fiche-event [event]="ev" [subscribed]="subscriptions.includes(ev.id)"></app-fiche-event>
-  </ng-template>
+  <ng-container *ngIf="events$ | async as eve; else loading">
+    <ng-template #pagination>
+      <nav aria-label="Pagination">
+        <ul class="pagination text-primary" style="cursor: pointer">
+          <li class="page-item" [ngClass]="page > 0 ? '' : 'disabled'">
+            <a class="page-link" (click)="changePage(page-1)" aria-label="Précédent">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li *ngFor="let item of arrayPage(); let i = index" [ngClass]="page === i ? 'active' : ''" class="page-item">
+            <a class="page-link" (click)="changePage(i)">{{i+1}}</a></li>
+          <li class="page-item" [ngClass]="page < totalPages-1 ? '' : 'disabled'">
+            <a class="page-link" (click)="changePage(page+1)" aria-label="Suivant">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </ng-template>
+
+    <div class="container mt-5">
+      <div [ngClass]="canCreateEvent ? 'justify-content-between' : 'justify-content-end'" class="d-flex align-items-center flex-wrap">
+        <button *ngIf="canCreateEvent" class="btn btn-primary btn-lg mb-3" routerLink="creation">Créer un événement</button>
+        <ng-template [ngTemplateOutlet]="pagination"></ng-template>
+      </div>
+
+    <app-fiche-event *ngFor="let ev of eve" [event]="ev" [subscribed]="subscriptions.includes(ev.id)"></app-fiche-event>
+
+      <div class="d-flex justify-content-end flex-wrap">
+        <ng-template [ngTemplateOutlet]="pagination"></ng-template>
+      </div>
+    </div>
+  </ng-container>
+
+
+
   <ng-template #loading>
     <div class="text-center">
-      <div class="spinner-grow text-primary" role="status">
+      <div class="spinner-grow text-primary" style="width: 30rem; height: 30rem;"  role="status">
         <span class="sr-only">Chargement...</span>
       </div>
     </div>
