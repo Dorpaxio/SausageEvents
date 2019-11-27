@@ -17,9 +17,9 @@ export class ConnexionComponent implements OnInit {
     password: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private router: Router) { }
+  constructor(public fb: FormBuilder,
+              public authService: AuthService,
+              public router: Router) { }
 
   ngOnInit() {
   }

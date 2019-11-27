@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class UsersService {
   baseUri = BACKEND_URL + 'users/';
 
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   hasPermission(perm: string): Observable<boolean> {
     return this.http.get<boolean>(this.baseUri + 'permissions/' + perm);

@@ -11,9 +11,9 @@ import {Router} from '@angular/router';
 export class InscriptionComponent implements OnInit {
   profileForm: FormGroup;
 
-  constructor(private fb: FormBuilder,
-              private authService: AuthService,
-              private router: Router) {
+  constructor(public fb: FormBuilder,
+              public authService: AuthService,
+              public router: Router) {
   }
 
   ngOnInit() {

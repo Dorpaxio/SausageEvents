@@ -27,6 +27,7 @@ import {CreateEventGuard} from './guards/create-event.guard';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
+import { TruncatePipe } from './pipes/truncate.pipe';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -42,7 +43,8 @@ registerLocaleData(localeFr, 'fr');
     EvenementsComponent,
     DateAgoPipe,
     FicheEventComponent,
-    EventCreationComponent
+    EventCreationComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,

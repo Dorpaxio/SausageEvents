@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Router } from '@angular/router';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {Observable, of, Subscription, throwError} from 'rxjs';
 import { BACKEND_URL } from '../assets/config';
 
 export interface User {
   pseudo: string;
   mail: string;
+  address;
+  city;
+  postal;
+  img;
 }
 
 @Injectable({
@@ -16,8 +20,10 @@ export interface User {
 export class AuthService {
   baseUri = BACKEND_URL + 'auth/';
 
-  constructor(private http: HttpClient,
-              private router: Router) {}
+  user: User;
+
+  constructor(public http: HttpClient,
+              public router: Router) {}
 
   register(user) {
     return this.http.post<any>(this.baseUri + 'register', user);
@@ -62,8 +68,15 @@ export class AuthService {
 
   getUser() {
     return this.http.get<any>(this.baseUri + 'me').pipe(
+      tap((res) => {
+        this.user = res;
+      }),
       catchError(this.handleMeError)
     );
+  }
+
+  getLastSavedUser() {
+    return this.user;
   }
 
   logout() {

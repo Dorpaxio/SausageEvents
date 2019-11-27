@@ -11,12 +11,12 @@ import {Router} from '@angular/router';
 })
 export class EventCreationComponent implements OnInit {
 
-  private eventForm: FormGroup;
-  private minutes: string[];
+  eventForm: FormGroup;
+  minutes: string[];
 
-  constructor(private fb: FormBuilder,
-              private eventsService: EventsService,
-              private router: Router) {
+  constructor(public fb: FormBuilder,
+              public eventsService: EventsService,
+              public router: Router) {
     this.minutes = Array(60).fill(0).map((x, i) => ('0' + i).slice(-2));
   }
 

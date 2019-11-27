@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {EventsService} from "../../events.service";
+import {EventsService} from '../../events.service';
 import {
   trigger,
   state,
@@ -30,11 +30,11 @@ export class FicheEventComponent implements OnInit {
   @Input() event;
   @Input() subscribed: boolean;
 
-  private showMessage = false;
-  private message = '';
-  private success = false;
+  showMessage = false;
+  message = '';
+  success = false;
 
-  constructor(private eventsService: EventsService) {
+  constructor(public eventsService: EventsService) {
   }
 
   ngOnInit() {
@@ -50,7 +50,6 @@ export class FicheEventComponent implements OnInit {
   subscribeEvent(eventId) {
     this.eventsService.subscribeEvent(eventId).subscribe(
       (result: {ok, message}) => {
-        console.log(result);
         if (result.ok) {
           this.subscribed = true;
           this.show('Vous êtes maintenant inscris à cet événement.', true);
@@ -67,7 +66,20 @@ export class FicheEventComponent implements OnInit {
         }
       }
     );
+  }
 
+  unsubscribeEvent(eventId) {
+    this.eventsService.unsubscribeEvent(eventId).subscribe(
+      (result: {ok, message}) => {
+        if (result.ok) {
+          this.subscribed = false;
+          this.show('Votre désinscription a été prise en compte.', true);
+        }
+      },
+      error => {
+        this.show(error.error.message || 'Un problème est survenu.', false);
+      }
+    );
   }
 
 }

@@ -7,7 +7,7 @@
       <div class="card-body">
         <h5 class="card-title">{{event.title}}</h5>
         <div class="card-text row">
-          <p class="col-md-10">{{event.description}}</p>
+          <p class="col-md-10">{{event.description | truncate:[256, '...']}}</p>
           <h4 class="text-right col-md-2 card-subtitle mb-2 text-danger font-weight-bold mt-0">{{event.date | date:'dd MMM yyyy hh\'h\'mm':'UTC'}}</h4>
         </div>
         <div class="card-text d-flex align-items-center">
@@ -15,11 +15,20 @@
 
           <div class="ml-auto">
             <small [ngClass]="{'text-success':success, 'text-danger':!success, 'mr-2':true}" [@showSubscriptionMessage]='showMessage'>{{message}}</small>
-            <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="subscribed || event.isFull">S'inscrire
-            </button>
+            <ng-container *ngIf="!subscribed; else buttonUnsubscribe">
+              <button class="btn btn-primary btn-sm" (click)="subscribeEvent(event.id)" [disabled]="event.isFull">S'inscrire</button>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #buttonSubscribe>
+
+</ng-template>
+
+<ng-template #buttonUnsubscribe>
+  <button class="btn btn-success btn-sm" (click)="unsubscribeEvent(event.id)">Se désinscrire</button>
+</ng-template>

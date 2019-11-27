@@ -24,14 +24,16 @@ export class MonCompteComponent implements OnInit {
   defaultProfilePicture = 'assets/img/empty-profile.png';
   timeStamp;
 
-  private deleteConfirmed = false;
+  deleteConfirmed = false;
 
-  constructor(private auth: AuthService,
-              private uploadService: FileUploadService,
-              private router: Router) {
+  constructor(public auth: AuthService,
+              public uploadService: FileUploadService,
+              public router: Router) {
   }
 
   ngOnInit() {
+    this.user = this.auth.getLastSavedUser();
+    console.log(this.user);
     this.auth.getUser().subscribe(
       res => {
         this.user = res;

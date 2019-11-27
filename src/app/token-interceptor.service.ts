@@ -10,11 +10,11 @@ import {finalize, tap} from 'rxjs/operators';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  private lastRefresh = 0;
+  public lastRefresh = 0;
 
-  constructor(private injector: Injector,
-              private auth: AuthService,
-              private router: Router) { }
+  constructor(public injector: Injector,
+              public auth: AuthService,
+              public router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authService = this.injector.get(AuthService);

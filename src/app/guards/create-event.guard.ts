@@ -9,8 +9,8 @@ import {UsersService} from '../users.service';
 })
 export class CreateEventGuard implements CanActivate {
 
-  constructor(private userService: UsersService,
-              private router: Router) {
+  constructor(public userService: UsersService,
+              public router: Router) {
   }
 
   canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

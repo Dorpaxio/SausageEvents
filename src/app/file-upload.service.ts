@@ -10,7 +10,7 @@ import { BACKEND_URL } from '../assets/config';
 })
 export class FileUploadService {
 
-  constructor(private http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   postFile(endPoint: string, fileToUpload: File): Observable<boolean | any> {
     const uri = BACKEND_URL + endPoint;

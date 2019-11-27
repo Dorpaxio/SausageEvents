@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
-  constructor(private auth: AuthService,
-              private router: Router) { }
+  constructor(public auth: AuthService,
+              public router: Router) { }
 
   user;
 

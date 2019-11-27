@@ -16,8 +16,8 @@ export class EvenementsComponent implements OnInit {
   subscriptions = [];
   canCreateEvent: boolean;
 
-  constructor(private eventsService: EventsService,
-              private usersService: UsersService) { }
+  constructor(public eventsService: EventsService,
+              public usersService: UsersService) { }
 
   ngOnInit() {
     this.eventsService.getSubs().subscribe((data: {id}[]) => {

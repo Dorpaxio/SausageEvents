@@ -20,7 +20,7 @@ interface Event {
 })
 export class EventsService {
 
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   baseUri = BACKEND_URL + 'events/';
 
@@ -35,6 +35,10 @@ export class EventsService {
 
   subscribeEvent(eventId) {
     return this.http.post(this.baseUri + 'subscriptions/', {id: eventId});
+  }
+
+  unsubscribeEvent(eventId) {
+    return this.http.delete(this.baseUri + 'subscriptions/' + eventId);
   }
 
   getSubs = () => this.http.get(this.baseUri + 'subscriptions/');
