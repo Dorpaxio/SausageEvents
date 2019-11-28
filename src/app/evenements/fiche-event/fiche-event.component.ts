@@ -7,6 +7,9 @@ import {
   animate,
   transition, stagger, query, keyframes
 } from '@angular/animations';
+import {Observable} from 'rxjs';
+import {AuthService} from '../../auth.service';
+import {UsersService} from '../../users.service';
 
 @Component({
   selector: 'app-fiche-event',
@@ -29,12 +32,14 @@ import {
 export class FicheEventComponent implements OnInit {
   @Input() event;
   @Input() subscribed: boolean;
+  @Input() canDeleteEvent: boolean;
 
   showMessage = false;
   message = '';
   success = false;
 
-  constructor(public eventsService: EventsService) {
+  constructor(public eventsService: EventsService,
+              public userService: UsersService) {
   }
 
   ngOnInit() {

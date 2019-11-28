@@ -15,6 +15,7 @@ export class EvenementsComponent implements OnInit {
   page = 0;
   subscriptions = [];
   canCreateEvent: boolean;
+  canDeleteEvent = false;
 
   constructor(public eventsService: EventsService,
               public usersService: UsersService) { }
@@ -26,6 +27,10 @@ export class EvenementsComponent implements OnInit {
     this.getEventsPage();
     this.usersService.hasPermission('create_event').subscribe(can => {
       this.canCreateEvent = can;
+    });
+
+    this.usersService.hasPermission('delete_event').subscribe(can => {
+      this.canDeleteEvent = can;
     });
   }
 

@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'https://sausage-events.charlesdesgenetez.fr:3001/';
+export const BACKEND_URL = 'http://shaggy-gecko-81.localtunnel.me:3000/';
