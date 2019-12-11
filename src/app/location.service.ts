@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
   getPosition(): Promise<any>
   {
@@ -19,7 +20,12 @@ export class LocationService {
           reject(err);
         });
     });
+  }
 
+  getLocationInfo(query: string) {
+    return this.http.get('https://nominatim.openstreetmap.org/search?q='
+      + query.replace(' ', '+')
+      + '&format=json&limit=1&addressdetails=1');
   }
 
 }

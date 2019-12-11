@@ -4,15 +4,15 @@
       <div class="floating-map">
         <div class="container">
           <div class="row mb-2">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Chercher un endroit">
+                <input type="text" class="form-control" [(ngModel)]="searchQuery" placeholder="Chercher un endroit">
                 <div class="input-group-append">
-                  <button class="btn btn-primary" type="button" id="mapSearchButton">Rechercher</button>
+                  <button class="btn btn-primary" (click)="search()" type="button" id="mapSearchButton">Rechercher</button>
                 </div>
               </div>
             </div>
-            <div class="col-md-7"></div>
+            <div class="col-md-5"></div>
             <div class="col-md-1 d-flex">
               <button class="btn btn-danger ml-auto">&times;</button>
             </div>

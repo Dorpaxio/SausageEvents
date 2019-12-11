@@ -10,7 +10,7 @@ declare var ol: any;
 })
 export class MapComponent implements OnInit {
 
-  constructor(private locationService: LocationService) { }
+  constructor(public locationService: LocationService) { }
 
   latitude: number = 18.5204;
   longitude: number = 73.8567;
