@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'http://shaggy-gecko-81.localtunnel.me:3000/';
+export const BACKEND_URL = 'http://localhost:3000/';

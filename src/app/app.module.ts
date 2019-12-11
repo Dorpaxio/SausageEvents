@@ -28,6 +28,9 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { TruncatePipe } from './pipes/truncate.pipe';
+import { MapComponent } from './map/map.component';
+import {LocationService} from "./location.service";
+import { FloatingMapComponent } from './map/floating-map/floating-map.component';
 registerLocaleData(localeFr, 'fr');
 
 @NgModule({
@@ -44,7 +47,9 @@ registerLocaleData(localeFr, 'fr');
     DateAgoPipe,
     FicheEventComponent,
     EventCreationComponent,
-    TruncatePipe
+    TruncatePipe,
+    MapComponent,
+    FloatingMapComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ registerLocaleData(localeFr, 'fr');
   AuthGuard,
   CreateEventGuard,
   EventsService,
-  FileUploadService],
+  FileUploadService,
+  LocationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
