@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { EventsService } from '../events.service';
 import { map, tap } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {UsersService} from '../users.service';
+import {FloatingMapComponent} from "../map/floating-map/floating-map.component";
 
 @Component({
   selector: 'app-evenements',
@@ -16,6 +17,8 @@ export class EvenementsComponent implements OnInit {
   subscriptions = [];
   canCreateEvent: boolean;
   canDeleteEvent = false;
+
+  @ViewChild(FloatingMapComponent, {static: false}) floatingMap : FloatingMapComponent;
 
   constructor(public eventsService: EventsService,
               public usersService: UsersService) { }

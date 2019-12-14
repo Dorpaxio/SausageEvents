@@ -10,6 +10,7 @@ import {MapComponent} from "../map.component";
 export class FloatingMapComponent implements OnInit {
 
   searchQuery: string;
+  hidden: boolean = true;
 
   @ViewChild(MapComponent, {static: false}) map: MapComponent;
 
@@ -21,16 +22,24 @@ export class FloatingMapComponent implements OnInit {
   search() {
     this.locationService.getLocationInfo(this.searchQuery).subscribe(
       (res: {lon, lat}) => {
-        const coord = {
-          longitude: res[0].lon,
-          latitude: res[0].lat
+        const coords = {
+          longitude: parseFloat(res[0].lon),
+          latitude: parseFloat(res[0].lat)
         };
-        console.log(coord);
-        this.map.setMapCenter(coord);
+        console.log(coords);<
+        this.map.setMapCenter(coords);
       }, err => {
         alert(err);
       }
     )
+  }
+
+  show() {
+    this.hidden = false;
+  }
+
+  hide() {
+    this.hidden = true;
   }
 
 }

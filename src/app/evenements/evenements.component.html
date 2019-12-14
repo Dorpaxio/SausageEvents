@@ -1,5 +1,13 @@
 <app-floating-map></app-floating-map>
+
 <div class="container mt-5">
+  <div class="container">
+    <div class="d-flex">
+      <button class="btn btn-outline-primary ml-auto" (click)="floatingMap.show()">
+        <img src="assets/img/cursor.png" alt="Version Map">
+      </button>
+    </div>
+  </div>
   <ng-container *ngIf="events$ | async as eve; else loading">
     <ng-template #pagination>
       <nav aria-label="Pagination">
@@ -20,7 +28,7 @@
       </nav>
     </ng-template>
 
-    <div class="container mt-5">
+    <div class="container mt-2">
       <div [ngClass]="canCreateEvent ? 'justify-content-between' : 'justify-content-end'" class="d-flex align-items-center flex-wrap">
         <button *ngIf="canCreateEvent" class="btn btn-primary btn-lg mb-3" routerLink="creation">Créer un événement</button>
         <ng-template [ngTemplateOutlet]="pagination"></ng-template>

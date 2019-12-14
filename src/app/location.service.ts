@@ -14,7 +14,7 @@ export class LocationService {
 
       navigator.geolocation.getCurrentPosition(resp => {
 
-          resolve({longitude: resp.coords.longitude, latitude: resp.coords.latitude});
+          resolve({latitude: resp.coords.latitude, longitude: resp.coords.longitude});
         },
         err => {
           reject(err);

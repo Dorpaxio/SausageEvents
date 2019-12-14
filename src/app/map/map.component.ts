@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {LocationService} from "../location.service";
-
-declare var ol: any;
+import * as L from 'leaflet';
+import {EventsService} from "../events.service";
+import {catchError, tap} from "rxjs/operators";
+import EventMarker from "./EventMarker.class";
 
 @Component({
   selector: 'app-map',
@@ -10,36 +12,55 @@ declare var ol: any;
 })
 export class MapComponent implements OnInit {
 
-  constructor(public locationService: LocationService) { }
-
-  latitude: number = 18.5204;
-  longitude: number = 73.8567;
+  constructor(public locationService: LocationService,
+              public eventsService: EventsService) { }
 
   map: any;
 
   ngOnInit() {
-    this.map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ]
-    });
+    this.map = L.map('frugalmap').setView([48.85825, 2.39499], 12);
 
     this.locationService.getPosition().then(
-      coords => {
+      (coords: {latitude, longitude}) => {
         this.setMapCenter(coords);
       }
     ).catch(() => {
-      this.setMapCenter({longitude: 2.39499, latitude: 48.85825})
+      this.setMapCenter({latitude: 48.85825, longitude: 2.39499});
     });
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: 'Frugal Map'
+    }).addTo(this.map);
+
+    this.eventsService.getEvents(0).subscribe(
+      (result: {totalPages, events}) => {
+        console.log(result);
+        for (let i = 0; i <= result.totalPages; i++) {
+          this.eventsService.getEvents(i).subscribe(
+            (res: {totalPages, events}) => {
+              for(let event of res.events) {
+                this.addMapCursor(new EventMarker(event));
+                console.log(event);
+              }
+            }, error => {
+
+            }
+          )
+        }
+      }, err => {
+        console.log(err);
+      });
   }
 
-  setMapCenter({longitude, latitude}) {
-    const view = this.map.getView();
-    view.setCenter(ol.proj.fromLonLat([longitude, latitude]));
-    view.setZoom(10);
+  setMapCenter({latitude, longitude}) {
+    this.map.setView([latitude, longitude], 12);
+  }
+
+  addMapCursor(marker: EventMarker) {
+    const markerIcon = L.icon({
+      iconUrl: marker.isActive() ? 'assets/img/map-cursor-active.png' : 'assets/map-cursor-inactive.png'
+    });
+    L.marker([marker.event.GPS_N, marker.event.GPS_E], {icon: markerIcon}).bindPopup(marker.getDescription()).addTo(this.map);
   }
 
 }

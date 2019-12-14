@@ -1,4 +1,4 @@
-<div class="outer">
+<div class="outer" [hidden]="hidden">
   <div class="middle">
     <div class="inner">
       <div class="floating-map">
@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-5"></div>
             <div class="col-md-1 d-flex">
-              <button class="btn btn-danger ml-auto">&times;</button>
+              <button class="btn btn-danger ml-auto" (click)="hide()">&times;</button>
             </div>
           </div>
           <app-map></app-map>
