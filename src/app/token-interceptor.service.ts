@@ -39,7 +39,6 @@ export class TokenInterceptorService implements HttpInterceptor {
           statusCode = event instanceof HttpResponse ? event.status : 0;
         }, error => {
           statusCode = error instanceof HttpErrorResponse ? error.status : 0;
-          console.log(statusCode);
         }
       ),
       finalize(() => {

@@ -67,7 +67,16 @@
     <div class="col-lg-10">
       <div class="container border border-primary rounded py-5">
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">oui</div>
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <h3 class="mb-5">Mes inscriptions</h3>
+            <ul class="list-group">
+              <li class="list-group-item d-flex" *ngFor="let ev of inscriptions$ | async">
+                <span class="text-primary font-weight-bold">{{ev.title}}</span>
+                <span class="text-black-50 ml-3">{{ev.description | truncate:[50, '...']}}</span>
+                <span class="ml-auto">{{ev.date | date}}</span>
+              </li>
+            </ul>
+          </div>
 
           <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <form>

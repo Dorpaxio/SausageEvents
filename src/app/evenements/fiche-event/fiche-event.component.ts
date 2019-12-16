@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import {EventsService} from '../../events.service';
 import {
   trigger,
@@ -33,6 +33,8 @@ export class FicheEventComponent implements OnInit {
   @Input() event;
   @Input() subscribed: boolean;
   @Input() canDeleteEvent: boolean;
+
+  @Output() deleted = new EventEmitter<void>();
 
   showMessage = false;
   message = '';
@@ -83,6 +85,18 @@ export class FicheEventComponent implements OnInit {
       },
       error => {
         this.show(error.error.message || 'Un problème est survenu.', false);
+      }
+    );
+  }
+
+  deleteEvent() {
+    this.eventsService.delete(this.event.id).subscribe(
+      (res: {ok: boolean}) => {
+        if(res.ok) {
+          this.deleted.emit();
+        }
+      }, error => {
+        console.log(error);
       }
     );
   }

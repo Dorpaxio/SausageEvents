@@ -26,7 +26,7 @@ export class FloatingMapComponent implements OnInit {
           longitude: parseFloat(res[0].lon),
           latitude: parseFloat(res[0].lat)
         };
-        console.log(coords);<
+        console.log(coords);
         this.map.setMapCenter(coords);
       }, err => {
         alert(err);

@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {FileUploadService} from '../file-upload.service';
 import {Router} from '@angular/router';
+import {EventsService} from "../events.service";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 interface User {
   pseudo: string;
@@ -24,21 +27,25 @@ export class MonCompteComponent implements OnInit {
   defaultProfilePicture = 'assets/img/empty-profile.png';
   timeStamp;
 
+  inscriptions$: Observable<any>;
+
   deleteConfirmed = false;
 
   constructor(public auth: AuthService,
               public uploadService: FileUploadService,
-              public router: Router) {
+              public router: Router,
+              public eventsService: EventsService) {
   }
 
   ngOnInit() {
     this.user = this.auth.getLastSavedUser();
-    console.log(this.user);
     this.auth.getUser().subscribe(
       res => {
         this.user = res;
         this.user.img = 'https://s3.eu-west-3.amazonaws.com/fr.dorpaxio.sausage/' + this.user.pseudo;
       });
+
+    this.getInscriptions();
   }
 
   handleFileUpload(files: FileList) {
@@ -71,6 +78,14 @@ export class MonCompteComponent implements OnInit {
         console.log('Erreur dans la suppresion de compte.');
       }
     });
+  }
+
+  getInscriptions() {
+    this.inscriptions$ = this.eventsService.getSubscribedEvents().pipe(
+      map(results => {
+        return results;
+      })
+    );
   }
 
 }

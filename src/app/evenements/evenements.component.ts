@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {UsersService} from '../users.service';
 import {FloatingMapComponent} from "../map/floating-map/floating-map.component";
+import EventMarker from "../map/EventMarker.class";
 
 @Component({
   selector: 'app-evenements',
@@ -35,6 +36,26 @@ export class EvenementsComponent implements OnInit {
     this.usersService.hasPermission('delete_event').subscribe(can => {
       this.canDeleteEvent = can;
     });
+
+    this.eventsService.getEvents(0).subscribe(
+      (result: {totalPages, events}) => {
+        console.log(result);
+        for (let i = 0; i <= result.totalPages; i++) {
+          this.eventsService.getEvents(i).subscribe(
+            (res: {totalPages, events}) => {
+              for(let event of res.events) {
+                this.floatingMap.map.addMapCursor(new EventMarker(event));
+                console.log(event);
+              }
+            }, error => {
+
+            }
+          )
+        }
+      }, err => {
+        console.log(err);
+      });
+
   }
 
   getEventsPage() {
@@ -54,6 +75,10 @@ export class EvenementsComponent implements OnInit {
 
   changePage(index: number) {
     this.page = index;
+    this.getEventsPage();
+  }
+
+  deleteEvent(ev) {
     this.getEventsPage();
   }
 

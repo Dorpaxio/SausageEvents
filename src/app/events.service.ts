@@ -41,6 +41,16 @@ export class EventsService {
     return this.http.delete(this.baseUri + 'subscriptions/' + eventId);
   }
 
-  getSubs = () => this.http.get(this.baseUri + 'subscriptions/');
+  getSubs() {
+    return this.http.get(this.baseUri + 'subscriptions/');
+  }
+
+  getSubscribedEvents() {
+    return this.http.get(this.baseUri + 'subscriptions/', {params: new HttpParams().set('detail', 'oui')});
+  }
+
+  delete(eventId) {
+    return this.http.delete(this.baseUri + eventId);
+  }
 
 }

@@ -34,7 +34,7 @@
         <ng-template [ngTemplateOutlet]="pagination"></ng-template>
       </div>
 
-    <app-fiche-event *ngFor="let ev of eve" [canDeleteEvent]="canDeleteEvent" [event]="ev" [subscribed]="subscriptions.includes(ev.id)"></app-fiche-event>
+    <app-fiche-event *ngFor="let ev of eve" [canDeleteEvent]="canDeleteEvent" [event]="ev" [subscribed]="subscriptions.includes(ev.id)" (deleted)="deleteEvent(ev)"></app-fiche-event>
 
       <div class="d-flex justify-content-end flex-wrap">
         <ng-template [ngTemplateOutlet]="pagination"></ng-template>

@@ -4,6 +4,7 @@ import * as L from 'leaflet';
 import {EventsService} from "../events.service";
 import {catchError, tap} from "rxjs/operators";
 import EventMarker from "./EventMarker.class";
+import Marker from "./Marker.class";
 
 @Component({
   selector: 'app-map',
@@ -32,35 +33,17 @@ export class MapComponent implements OnInit {
       attribution: 'Frugal Map'
     }).addTo(this.map);
 
-    this.eventsService.getEvents(0).subscribe(
-      (result: {totalPages, events}) => {
-        console.log(result);
-        for (let i = 0; i <= result.totalPages; i++) {
-          this.eventsService.getEvents(i).subscribe(
-            (res: {totalPages, events}) => {
-              for(let event of res.events) {
-                this.addMapCursor(new EventMarker(event));
-                console.log(event);
-              }
-            }, error => {
-
-            }
-          )
-        }
-      }, err => {
-        console.log(err);
-      });
   }
 
   setMapCenter({latitude, longitude}) {
     this.map.setView([latitude, longitude], 12);
   }
 
-  addMapCursor(marker: EventMarker) {
+  addMapCursor(marker: Marker) {
     const markerIcon = L.icon({
       iconUrl: marker.isActive() ? 'assets/img/map-cursor-active.png' : 'assets/map-cursor-inactive.png'
     });
-    L.marker([marker.event.GPS_N, marker.event.GPS_E], {icon: markerIcon}).bindPopup(marker.getDescription()).addTo(this.map);
+    L.marker([marker.obj.latitude, marker.obj.longitude], {icon: markerIcon}).bindPopup(marker.getDescription()).addTo(this.map);
   }
 
 }
