@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'https://charlesdesgenetez.fr:3001/events';
+export const BACKEND_URL = 'https://charlesdesgenetez.fr:3001/';
